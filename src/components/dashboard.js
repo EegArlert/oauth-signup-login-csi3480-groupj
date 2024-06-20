@@ -13,6 +13,7 @@ const Dashboard = () => {
       setError('')
 
       try {
+        //firebase cloud function logout -> redirect to login
         await logout()
         navigate("/login")
       } catch {

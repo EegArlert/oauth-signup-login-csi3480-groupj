@@ -16,10 +16,10 @@ const SignUp = () => {
   const [ loading, setloading ] = useState(false)
   const navigate = useNavigate()
 
+  //handle event trigger onSubmit on Signup
   async function handleSubmit(e) {
     e.preventDefault()
-    
-
+  
     if (passwordRef.current.value !== passwordConfirmRef.current.value) {
       return setError("Password does not match!")
     }

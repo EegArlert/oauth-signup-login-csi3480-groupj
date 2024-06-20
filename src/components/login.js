@@ -3,7 +3,8 @@ import { Card, Form, Button, Alert, CardBody } from 'react-bootstrap'
 import { useAuth } from '../contexts/Auth'
 import { Link, useNavigate } from 'react-router-dom'
 import { signInWithPopup, GoogleAuthProvider } from "firebase/auth";
-import GoogleButton from 'react-google-button'
+import GoogleButton from 'react-google-button';
+import { auth } from "../db/firebase-config";
 
 
 const Login = () => {
@@ -15,6 +16,8 @@ const Login = () => {
   const [loading, setloading] = useState(false)
   const navigate = useNavigate()
 
+  
+//handle event trigger onSubmit for submit button
   const handleSubmit = async (e) => {
     e.preventDefault()
 
@@ -30,6 +33,22 @@ const Login = () => {
 
     setloading(false)
   }
+
+
+  //handle event trigger onSubmit google button
+  const handleGoogleSubmit = async(e) => {
+      const provider = await new GoogleAuthProvider();
+      
+      try{
+      const result = await signInWithPopup(auth, provider)
+      navigate('/')
+
+      } catch {
+        setError("Authentication failed")
+      }
+    }
+  
+  
 
   return (
     <>
@@ -52,7 +71,11 @@ const Login = () => {
             </Button>
             <Form.Label className='d-flex justify-content-center align-items-center mt-4'>--or sign in with--</Form.Label>
             <Card.Body className='d-flex mt-3 align-items-center justify-content-center'>
-              <GoogleButton disabled={loading} onClick={console.log('google button pressed')}/>
+
+              <GoogleButton disabled={loading}
+                onClick={handleGoogleSubmit}
+              />
+
             </Card.Body>
             <div className="w-100 text-center mt-3">
               <Link to='/forgotpassword'>Forgot Password?</Link>

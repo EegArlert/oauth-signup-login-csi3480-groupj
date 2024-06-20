@@ -11,6 +11,7 @@ const ForgotPassword = () => {
     const [message, setMessage] = useState("")
     const [loading, setLoading] = useState(false)
     
+    //handle event trigger for the submit button
       const handleSubmit = async(e) => {
         e.preventDefault()
     
@@ -18,6 +19,7 @@ const ForgotPassword = () => {
             setMessage("")
             setError("")
             setLoading(true)
+            //firebase cloud function resetPassword
             await resetPassword(emailRef.current.value)
             setMessage("Check your inbox for further instructions")
           } catch {

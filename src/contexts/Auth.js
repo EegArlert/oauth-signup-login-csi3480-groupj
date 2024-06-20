@@ -29,14 +29,22 @@ const AuthProvider = ({ children }) => {
     const resetPassword = (email) =>
         sendPasswordResetEmail(auth, email)
 
-    // const signInGoogle = () => {
-    //     const provider = new GoogleAuthProvider()
-    //     signInWithPopup(auth, provider).then(async (result) => {
-
-    //     })
-    // }
+    const signInWithGoogle = () => {
+        const provider = new GoogleAuthProvider()
+        signInWithPopup(auth, provider)
+            .then(async (result) => {
+                // This gives you a Google Access Token. You can use it to access the Google API.
+                const credential = GoogleAuthProvider.credentialFromResult(result);
+                const token = credential.accessToken;
+                // The signed-in user info.
+                const user = result.user;
+                // IdP data available using getAdditionalUserInfo(result)
+            })
+    }
 
     useEffect(() => {
+        //hook for assigning currentUser everytime that auth state change.
+        //force the function to always listen to a user state change.
         const unsuscribe = auth.onAuthStateChanged(user => {
             setCurrentUser(user)
             setLoading(false)
@@ -51,7 +59,7 @@ const AuthProvider = ({ children }) => {
         login,
         logout,
         resetPassword,
-        // signInGoogle
+        signInWithGoogle
     }
 
 

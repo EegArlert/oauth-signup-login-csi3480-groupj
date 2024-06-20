@@ -15,6 +15,7 @@ function App() {
         <div className='w-100' style={{ maxWidth: "400px" }}>
           <BrowserRouter>
             <Routes>
+              //This route acts if the user authenticate, / will bring them to dashboard page.
               <Route element={<PrivateRoutes />}>
                 <Route exact path="/" element={<Dashboard />} />
               </Route>
