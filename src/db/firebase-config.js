@@ -1,6 +1,7 @@
 import { initializeApp } from "firebase/app";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 
+
 // Firebase config that is pulled from firebase console
 const firebaseConfig = {
   apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
